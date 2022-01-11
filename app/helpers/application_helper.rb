@@ -19,7 +19,11 @@ module ApplicationHelper
   end
 
   def active_class(path)
-    'active' if current_page?(path)
+    'border-gold-500 text-gray-900' if current_page?(path)
+  end
+
+  def mobile_active_class(path)
+    'bg-gray-100 text-gray-900' if current_page?(path)
   end
 
   def first_four_success_stories

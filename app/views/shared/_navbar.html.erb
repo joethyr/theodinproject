@@ -1,7 +1,9 @@
+<div data-controller="mobile-menu" class="dark">
+  <%= render 'shared/mobile_menu' %>
 <!-- This example requires Tailwind CSS v2.0+ -->
-<nav class="bg-white shadow">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between h-16">
+<nav class=" dark:bg-red-400 bg-white mb-8 sm:mb-16 md:mb-20 lg:mb-24" >
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3">
+    <div class="flex justify-between">
       <div class="flex">
         <div class="flex-shrink-0 flex items-center">
           <%= link_to root_path, class: 'logo' do %>
@@ -9,7 +11,7 @@
           <% end %>
 
           <%= link_to root_path, class: 'logo' do %>
-            <%= image_tag 'logo.svg' , alt: "Odin Logo" , class: 'hidden lg:block h-12 w-auto' %>
+            <%= image_tag 'logo.svg' , alt: "Odin Logo" , class: 'hidden lg:block h-14 w-auto' %>
           <% end %>
         </div>
 
@@ -18,12 +20,12 @@
         <% if user_signed_in? %>
           <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
             <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
-            <%= link_to 'All Paths', paths_url, class: 'border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium' %>
-            <%= link_to 'Community', chat_link, class: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium' %>
-            <%= link_to 'Dashboard', dashboard_path, class: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium' %>
+            <%= link_to 'All Paths', paths_url, class: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-md font-medium #{active_class('/paths')}" %>
+            <%= link_to 'Community', chat_link, class: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-md font-medium' %>
+            <%= link_to 'Dashboard', dashboard_path, class: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-md font-medium #{active_class(dashboard_path)}" %>
           </div>
 
-          <%= link_to notifications_path, class: "bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500", data: { test_id: 'navbar-notification-icon' } do %>
+          <%= link_to notifications_path, class: " ml-3 bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500", data: { test_id: 'navbar-notification-icon' } do %>
             <span class="sr-only">View notifications</span>
             <!-- Heroicon name: outline/bell -->
             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -32,11 +34,11 @@
           <% end %>
 
         <!-- Profile dropdown -->
-          <div class="ml-3 relative">
+          <div class="ml-3 relative" data-controller="drop-down">
             <div>
-              <button type="button" class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+              <button type="button" data-action="click->drop-down#toggle" class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                 <span class="sr-only">Open user menu</span>
-                <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                <%= image_tag avatar_path(current_user.avatar), size: "30x30", class: 'h-9 w-9 rounded-full', alt: 'user avatar' %>
               </button>
             </div>
 
@@ -50,26 +52,26 @@
                 From: "transform opacity-100 scale-100"
                 To: "transform opacity-0 scale-95"
             -->
-            <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+            <div data-drop-down-target="menu" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
               <!-- Active: "bg-gray-100", Not Active: "" -->
-              <%= link_to 'Settings', edit_user_registration_path, class: "block px-4 py-2 text-sm text-gray-700" %>
-              <%= link_to 'Log out', logout_path, class: "block px-4 py-2 text-sm text-gray-700" %>
+              <%= link_to 'Settings', edit_user_registration_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+              <%= link_to 'Log out', logout_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
             </div>
           </div>
         <% else %>
           <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-            <%= link_to 'All Paths', paths_url, class: 'border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium' %>
-            <%= link_to 'About', about_path, class: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium' %>
-            <%= link_to 'Community', chat_link, class: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium' %>
-            <%= link_to 'Get Started', sign_up_path, class: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium' %>
-            <%= link_to 'Log in', login_path, class: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium' %>
+            <%= link_to 'All Paths', paths_url, class: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-md font-medium #{active_class(paths_url)}" %>
+            <%= link_to 'About', about_path, class: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-md font-medium #{active_class(about_path)}" %>
+            <%= link_to 'Community', chat_link, class: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-md font-medium' %>
+            <%= link_to 'Get Started', sign_up_path, class: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-md font-medium #{active_class(sign_up_path)}" %>
+            <%= link_to 'Log in', login_path, class: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-md font-medium #{active_class(login_path)}" %>
         </div>
 
         <% end %>
       </div>
       <div class="-mr-2 flex items-center sm:hidden">
         <!-- Mobile menu button -->
-        <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-controls="mobile-menu" aria-expanded="false">
+        <button type="button" data-action="click->mobile-menu#toggle" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-controls="mobile-menu" aria-expanded="false">
           <span class="sr-only">Open main menu</span>
           <!--
             Icon when menu is closed.
@@ -78,7 +80,7 @@
 
             Menu open: "hidden", Menu closed: "block"
           -->
-          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" data-mobile-menu-target="openButton">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
           <!--
@@ -88,7 +90,7 @@
 
             Menu open: "block", Menu closed: "hidden"
           -->
-          <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" data-mobile-menu-target="closeButton">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
@@ -97,21 +99,20 @@
   </div>
 
   <!-- Mobile menu, show/hide based on menu state. -->
-  <div class="sm:hidden" id="mobile-menu">
+  <div class="hidden sm:hidden h-screen">
     <% if user_signed_in? %>
       <div class="pt-2 pb-3 space-y-1">
-        <%= link_to 'All Paths', paths_url, class: 'bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium' %>
+        <%= link_to 'All Paths', paths_url, class: 'bg-gold-50 border-gold-500 text-gold-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium' %>
         <%= link_to 'Community', chat_link, class: 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium' %>
         <%= link_to 'Dashboard', dashboard_path, class: 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium' %>
       </div>
       <div class="pt-4 pb-3 border-t border-gray-200">
         <div class="flex items-center px-4">
           <div class="flex-shrink-0">
-            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+            <%= image_tag avatar_path(current_user.avatar), size: "30x30", class: 'h-10 w-10 rounded-full', alt: 'user avatar' %>
           </div>
           <div class="ml-3">
-            <div class="text-base font-medium text-gray-800">Tom Cook</div>
-            <div class="text-sm font-medium text-gray-500">tom@example.com</div>
+            <div class="text-base font-medium text-gray-800"><%= current_user.username %></div>
           </div>
 
           <%= link_to notifications_path, class: "ml-auto flex-shrink-0 bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500", data: { test_id: 'navbar-notification-icon' } do %>
@@ -139,3 +140,4 @@
     <% end %>
   </div>
 </nav>
+</div>
