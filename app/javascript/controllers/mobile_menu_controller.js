@@ -8,7 +8,10 @@ export default class MobileMenuController extends Controller {
     useClickOutside(this)
   }
 
-  toggle() {
+  toggle(event) {
+    event.preventDefault()
+
+    console.log('toggle');
     this.menuTarget.classList.toggle('hidden');
   }
 
