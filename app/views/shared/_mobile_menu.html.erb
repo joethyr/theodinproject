@@ -1,19 +1,19 @@
-<div>
 <div
-    data-controller="mobile-menu"
-    data-action="events:openMobileMenu@window->mobile-menu#open"
-    class="fixed inset-0 flex z-40 hidden lg:hidden"
-    role="dialog"
-    aria-modal="true"
-    data-transition-target="content"
-    data-mobile-menu-target="menu"
-    data-transition-enter-active="transition-opacity ease-linear duration-300"
-    data-transition-enter-from="transform opacity-0"
-    data-transition-enter-to="transform opacity-100"
-    data-transition-leave-active="transition-opacity ease-linear duration-300"
-    data-transition-leave-from="transform opacity-100"
-    data-transition-leave-to="transform opacity-0"
-  >
+  data-controller="transition mobile-menu"
+  data-transition-target="overlay"
+  data-action="events:openMobileMenu@window->mobile-menu#open"
+  data-mobile-menu-target="menu"
+  class="fixed inset-0 flex z-40 hidden lg:hidden"
+  role="dialog"
+  aria-modal="true"
+  data-target="transistion.overlay"
+  data-transition-enter-active="transition-opacity ease-linear duration-300"
+  data-transition-enter-from="transform opacity-0"
+  data-transition-enter-to="transform opacity-100"
+  data-transition-leave-active="transition-opacity ease-linear duration-300"
+  data-transition-leave-from="transform opacity-100"
+  data-transition-leave-to="transform opacity-0"
+>
     <!--
       Off-canvas menu overlay, show/hide based on off-canvas menu state.
 
@@ -33,9 +33,11 @@
   data-transition-leave-to="transform opacity-0 scale-95" -->
 
     <div
+      data-controller
       data-action="click->mobile-menu#close"
       class="fixed inset-0 bg-gray-600 bg-opacity-75"
       aria-hidden="true"
+      data-target="transition.overlay"
       data-transition-enter-active="transition ease-in-out duration-300 transform"
       data-transition-enter-from="-translate-x-full"
       data-transition-enter-to="translate-x-0"
@@ -57,13 +59,14 @@
     -->
     <div
       class="relative flex-1 flex flex-col max-w-xs w-full bg-white focus:outline-none"
+      data-target="transition.overlay"
       data-transition-enter-active="transition ease-in-out duration-300"
       data-transition-enter-from="transform opacity-0"
       data-transition-enter-to="transform opacity-100"
       ata-transition-leave-active="transition ease-in duration-300"
       data-transition-leave-from="transform opacity-100"
       data-transition-leave-to="transform opacity-0"
-      >
+    >
       <!--
         Close button, show/hide based on off-canvas menu state.
 
