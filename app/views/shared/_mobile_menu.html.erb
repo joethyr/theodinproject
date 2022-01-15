@@ -1,4 +1,7 @@
-  <div
+<div>
+<div
+    data-controller="mobile-menu"
+    data-action="events:openMobileMenu@window->mobile-menu#open"
     class="fixed inset-0 flex z-40 hidden lg:hidden"
     role="dialog"
     aria-modal="true"
@@ -10,7 +13,6 @@
     data-transition-leave-active="transition-opacity ease-linear duration-300"
     data-transition-leave-from="transform opacity-100"
     data-transition-leave-to="transform opacity-0"
-    data-action="mobile-menu:click:outside@document->mobile-menu#toggle"
   >
     <!--
       Off-canvas menu overlay, show/hide based on off-canvas menu state.
@@ -31,6 +33,7 @@
   data-transition-leave-to="transform opacity-0 scale-95" -->
 
     <div
+      data-action="click->mobile-menu#close"
       class="fixed inset-0 bg-gray-600 bg-opacity-75"
       aria-hidden="true"
       data-transition-enter-active="transition ease-in-out duration-300 transform"
@@ -78,7 +81,7 @@
   data-transition-leave-active="transition ease-in duration-300"
   data-transition-leave-from="transform opacity-100 scale-100"
   data-transition-leave-to="transform opacity-0 scale-95" -->
-      <div class="absolute top-2 right-2 -mr-12 pt-3" data-action="click->mobile-menu#toggle">
+      <div class="absolute top-2 right-2 -mr-12 pt-3" data-action="click->mobile-menu#close">
         <button type="button" class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
           <span class="sr-only">Close sidebar</span>
           <!-- Heroicon name: outline/x -->
@@ -187,3 +190,4 @@
       <!-- Force sidebar to shrink to fit close icon -->
     </div>
   </div>
+</div>

@@ -1,7 +1,7 @@
-<div data-controller="mobile-menu">
+<div>
   <%= render 'shared/mobile_menu' %>
 <!-- This example requires Tailwind CSS v2.0+ -->
-<nav class="bg-white mb-8 sm:mb-16 md:mb-20 lg:mb-24" >
+<nav class="bg-white mb-8 sm:mb-16 md:mb-20 lg:mb-24">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3">
     <div class="flex justify-between">
       <div class="flex">
@@ -71,7 +71,7 @@
       </div>
       <div class="-mr-2 flex items-center sm:hidden">
         <!-- Mobile menu button -->
-        <button type="button" data-action="click->mobile-menu#toggle" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gold-500" aria-controls="mobile-menu" aria-expanded="false">
+        <button type="button" data-controller="events" data-action="events#emit" data-events-event-name-value="openMobileMenu" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gold-500" aria-controls="mobile-menu" aria-expanded="false">
           <span class="sr-only">Open main menu</span>
           <!--
             Icon when menu is closed.
