@@ -93,12 +93,6 @@ RSpec.describe ApplicationHelper do
         )
       end
 
-      describe '#course_started_by_user?' do
-        it 'returns false' do
-          expect(helper.course_started_by_user?(course, user)).to eq(false)
-        end
-      end
-
       describe '#course_completed_by_user?' do
         it 'returns false' do
           expect(helper.course_completed_by_user?(course, user)).to eq(false)
@@ -127,12 +121,6 @@ RSpec.describe ApplicationHelper do
         )
       end
 
-      describe '#course_started_by_user?' do
-        it 'returns true' do
-          expect(helper.course_started_by_user?(course, user)).to eq(true)
-        end
-      end
-
       describe '#course_completed_by_user?' do
         it 'returns false' do
           expect(helper.course_completed_by_user?(course, user)).to eq(false)
@@ -159,12 +147,6 @@ RSpec.describe ApplicationHelper do
           completed?: true,
           percentage: 100
         )
-      end
-
-      describe '#course_started_by_user?' do
-        it 'returns true' do
-          expect(helper.course_started_by_user?(course, user)).to eq(true)
-        end
       end
 
       describe '#course_completed_by_user?' do
@@ -203,26 +185,22 @@ RSpec.describe ApplicationHelper do
     end
   end
 
-  describe '#svg_icon' do
-    context 'when the provided filename does not exist' do
-      let(:filename) { 'bad_filename' }
+  describe '#unread_notifications' do
+    let!(:user) { create(:user) }
 
-      it 'returns nil' do
-        expect(helper.svg_icon(filename)).to be_nil
+    context 'when the user has unread notifications' do
+      let!(:unread_notification) { create(:notification, recipient: user, read_at: nil) }
+
+      it 'returns true' do
+        expect(helper.unread_notifications?(user)).to be true
       end
     end
 
-    context 'when the provided filename does exist' do
-      let(:filename) { 'good_filename' }
-      let(:svg) { '<svg>test svg</svg>' }
+    context 'when the user has no unread notifications' do
+      let!(:read_notification) { create(:notification, recipient: user, read_at: Time.zone.now) }
 
-      before do
-        allow(File).to receive(:exist?).and_return true
-        allow(File).to receive(:read).and_return svg
-      end
-
-      it 'returns the svg in an html safe way' do
-        expect(helper.svg_icon(filename)).to eq '<svg>test svg</svg>'
+      it 'returns false' do
+        expect(helper.unread_notifications?(user)).to be false
       end
     end
   end

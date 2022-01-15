@@ -13,12 +13,16 @@
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+import Rails from '@rails/ujs';
+
 import '../layouts/application.css';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import 'bootstrap/dist/js/bootstrap';
 import 'hint.css/hint.min.css';
+import 'notyf/notyf.min.css';
 
 import '../src/js/analytics';
 import '../src/js/axiosWithCsrf';
@@ -34,8 +38,7 @@ import '../src/js/scrollspy.min';
 
 import 'controllers';
 
-require('@rails/ujs').start();
-require('turbolinks').start();
+Rails.start();
 
 const componentRequireContext = require.context('components', true);
 const ReactRailsUJS = require('react_ujs');
