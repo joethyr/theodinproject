@@ -21,6 +21,7 @@
     "bootstrap": "^4.6.0",
     "browserslist": "^4.19.1",
     "core-js": "^3.20.2",
+    "el-transition": "^0.0.7",
     "hint.css": "^2.7.0",
     "humps": "^2.0.1",
     "jquery": "^3.6.0",

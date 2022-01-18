@@ -1,13 +1,27 @@
 import { Controller } from '@hotwired/stimulus';
+import { enter, leave } from 'el-transition'
 
 export default class MobileMenuController extends Controller {
-  static targets = ['menu'];
+  static targets = ['container', 'menuOverlay', 'menu', 'closeButton'];
 
   open() {
-    this.menuTarget.classList.remove('hidden');
+    this.menuElements().forEach(menuElement => enter(menuElement));
   }
 
-  close() {
-    this.menuTarget.classList.add('hidden');
+  async close() {
+    const menuElements = this.menuElements().reverse();
+
+    for (const menuElement of menuElements) {
+      await leave(menuElement);
+    }
+  }
+
+  menuElements() {
+    return [
+      this.containerTarget,
+      this.menuOverlayTarget,
+      this.menuTarget,
+      this.closeButtonTarget
+    ]
   }
 }
