@@ -4,19 +4,19 @@ import { useClickOutside } from 'stimulus-use'
 import { toggle, leave } from 'el-transition'
 
 export default class DropdownController extends Controller {
-  static targets = ['menu'];
+  static targets = ['content'];
 
   connect() {
     useClickOutside(this)
   }
 
   toggle() {
-    toggle(this.menuTarget);
+    toggle(this.contentTarget);
   }
 
-  clickOutside(event) {
-    if(!this.menuTarget.classList.contains('hidden')) {
-      leave(this.menuTarget);
+  clickOutside() {
+    if(!this.contentTarget.classList.contains('hidden')) {
+      leave(this.contentTarget);
     }
   }
 }

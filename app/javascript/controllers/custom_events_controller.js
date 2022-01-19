@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
 
-export default class EventsController extends Controller {
+export default class CustomEventsController extends Controller {
   static values = {
     eventName: String,
     payload: { type: Object, default: {} },

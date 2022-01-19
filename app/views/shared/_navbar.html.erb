@@ -18,9 +18,9 @@
       <div class="hidden sm:ml-6 sm:flex sm:items-center">
         <% if user_signed_in? %>
           <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-            <%= render NavLinkComponent.new(path: paths_url, link_text: 'All Paths') %>
-            <%= render NavLinkComponent.new(path: chat_link, link_text: 'Community') %>
-            <%= render NavLinkComponent.new(path: dashboard_path, link_text: 'Dashboard') %>
+            <%= render Nav::ItemComponent.new(path: paths_url, link_text: 'All Paths') %>
+            <%= render Nav::ItemComponent.new(path: chat_link, link_text: 'Community') %>
+            <%= render Nav::ItemComponent.new(path: dashboard_path, link_text: 'Dashboard') %>
           </div>
 
           <%= link_to notifications_path, class: " ml-3 bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500", data: { test_id: 'navbar-notification-icon' } do %>
@@ -28,49 +28,21 @@
             <%= inline_svg_tag "icons/bell.svg", class: "h-6 w-6", aria: true, title: "Notifications icon" %>
           <% end %>
 
-        <!-- Profile dropdown -->
-          <div class="ml-3 relative" data-controller="drop-down transistion" data-transition-target="menu">
-            <div>
-              <button type="button" data-action="click->drop-down#toggle" class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                <span class="sr-only">Open user menu</span>
-                <%= render User::AvatarComponent.new(current_user: current_user, size_classes: "h-9 w-9") %>
-              </button>
-            </div>
-
-            <div
-              data-drop-down-target="menu"
-              data-transition-enter="transition ease-out duration-200"
-              data-transition-enter-start="transform opacity-0 scale-95"
-              data-transition-enter-end="transform opacity-100 scale-100"
-              data-transition-leave="transition ease-in duration-75"
-              data-transition-leave-start="transform opacity-100 scale-100"
-              data-transition-leave-end="transform opacity-10 scale-95"
-              class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-              role="menu"
-              aria-orientation="vertical"
-              aria-labelledby="user-menu-button"
-              tabindex="-1"
-            >
-              <!-- Active: "bg-gray-100", Not Active: "" -->
-              <%= link_to 'Settings', edit_user_registration_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
-              <%= link_to 'Log out', logout_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
-            </div>
-          </div>
+          <%= render User::ProfileDropdownComponent.new(current_user: current_user) %>
         <% else %>
           <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-          <%= render NavLinkComponent.new(path: paths_url, link_text: 'All Paths') %>
-          <%= render NavLinkComponent.new(path: about_path, link_text: 'About') %>
-          <%= render NavLinkComponent.new(path: chat_link, link_text: 'Community') %>
-          <%= render NavLinkComponent.new(path: sign_up_path, link_text: 'Get Started') %>
-          <%= render NavLinkComponent.new(path: login_path, link_text: 'Log In') %>
+          <%= render Nav::ItemComponent.new(path: paths_url, link_text: 'All Paths') %>
+          <%= render Nav::ItemComponent.new(path: about_path, link_text: 'About') %>
+          <%= render Nav::ItemComponent.new(path: chat_link, link_text: 'Community') %>
+          <%= render Nav::ItemComponent.new(path: sign_up_path, link_text: 'Get Started') %>
+          <%= render Nav::ItemComponent.new(path: login_path, link_text: 'Log In') %>
         </div>
 
         <% end %>
       </div>
 
       <div class="-mr-2 flex items-center sm:hidden">
-        <!-- Mobile menu button -->
-        <button type="button" data-controller="events" data-action="events#emit" data-events-event-name-value="openMobileMenu" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gold-500" aria-controls="mobile-menu" aria-expanded="false">
+        <button type="button" data-controller="custom-events" data-action="custom-events#emit" data-custom-events-event-name-value="openMobileMenu" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gold-500" aria-controls="mobile-menu" aria-expanded="false">
           <span class="sr-only">Open mobile menu</span>
           <%= inline_svg_tag "icons/ham-burger.svg", class: "block h-6 w-6", aria: true, title: "Open mobile menu button" %>
         </button>
