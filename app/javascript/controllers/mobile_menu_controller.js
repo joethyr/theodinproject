@@ -1,11 +1,12 @@
+/* eslint no-await-in-loop:0, no-restricted-syntax:0 */
 import { Controller } from '@hotwired/stimulus';
-import { enter, leave } from 'el-transition'
+import { enter, leave } from 'el-transition';
 
 export default class MobileMenuController extends Controller {
   static targets = ['container', 'menuOverlay', 'menu', 'closeButton'];
 
   open() {
-    this.menuElements().forEach(menuElement => enter(menuElement));
+    this.menuElements().forEach((menuElement) => enter(menuElement));
   }
 
   async close() {
@@ -21,7 +22,7 @@ export default class MobileMenuController extends Controller {
       this.containerTarget,
       this.menuOverlayTarget,
       this.menuTarget,
-      this.closeButtonTarget
-    ]
+      this.closeButtonTarget,
+    ];
   }
 }

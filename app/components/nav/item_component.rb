@@ -1,7 +1,8 @@
 class Nav::ItemComponent < ViewComponent::Base
-  def initialize(path:, link_text:, icon_path: nil, mobile: false)
+  def initialize(path:, text:, test_id:, icon_path: nil, mobile: false)
     @path = path
-    @link_text = link_text
+    @text = text
+    @test_id = test_id
     @icon_path = icon_path
     @mobile = mobile
   end
@@ -12,5 +13,5 @@ class Nav::ItemComponent < ViewComponent::Base
 
   private
 
-  attr_reader :path, :link_text, :icon_path, :mobile
+  attr_reader :path, :text, :test_id, :icon_path, :mobile
 end

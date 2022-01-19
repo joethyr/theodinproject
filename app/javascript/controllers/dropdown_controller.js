@@ -1,13 +1,13 @@
 import { Controller } from '@hotwired/stimulus';
-import { useClickOutside } from 'stimulus-use'
+import { useClickOutside } from 'stimulus-use';
 
-import { toggle, leave } from 'el-transition'
+import { toggle, leave } from 'el-transition';
 
 export default class DropdownController extends Controller {
   static targets = ['content'];
 
   connect() {
-    useClickOutside(this)
+    useClickOutside(this);
   }
 
   toggle() {
@@ -15,7 +15,7 @@ export default class DropdownController extends Controller {
   }
 
   clickOutside() {
-    if(!this.contentTarget.classList.contains('hidden')) {
+    if (!this.contentTarget.classList.contains('hidden')) {
       leave(this.contentTarget);
     }
   }

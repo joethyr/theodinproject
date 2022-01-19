@@ -60,24 +60,24 @@
         <nav aria-label="Sidebar" class="mt-3">
           <div class="px-2 space-y-1">
             <% if user_signed_in? %>
-              <%= render Nav::ItemComponent.new(path: dashboard_path, link_text: 'Dashboard', icon_path: 'icons/home.svg', mobile: true) %>
-              <%= render Nav::ItemComponent.new(path: paths_url, link_text: 'All Paths', icon_path: 'icons/map.svg', mobile: true) %>
-              <%= render Nav::ItemComponent.new(path: chat_link, link_text: 'Community', icon_path: 'icons/speech-bubbles.svg', mobile: true) %>
+              <%= render Nav::ItemComponent.new(path: dashboard_path, text: 'Dashboard', test_id: 'nav-dashboard', icon_path: 'icons/home.svg', mobile: true) %>
+              <%= render Nav::ItemComponent.new(path: paths_url, text: 'All Paths', test_id: 'nav-all-paths', icon_path: 'icons/map.svg', mobile: true) %>
+              <%= render Nav::ItemComponent.new(path: chat_link, text: 'Community', test_id: 'nav-community', icon_path: 'icons/speech-bubbles.svg', mobile: true) %>
             <% else %>
-              <%= render Nav::ItemComponent.new(path: root_path, link_text: 'Home', icon_path: 'icons/home.svg', mobile: true) %>
-              <%= render Nav::ItemComponent.new(path: paths_url, link_text: 'All Paths', icon_path: 'icons/map.svg', mobile: true) %>
-              <%= render Nav::ItemComponent.new(path: about_path, link_text: 'About', icon_path: 'icons/information.svg', mobile: true) %>
-              <%= render Nav::ItemComponent.new(path: chat_link, link_text: 'Community', icon_path: 'icons/speech-bubbles.svg', mobile: true) %>
+              <%= render Nav::ItemComponent.new(path: root_path, text: 'Home', test_id: 'nav-home', icon_path: 'icons/home.svg', mobile: true) %>
+              <%= render Nav::ItemComponent.new(path: paths_url, text: 'All Paths', test_id: 'nav-all-paths', icon_path: 'icons/map.svg', mobile: true) %>
+              <%= render Nav::ItemComponent.new(path: about_path, text: 'About', test_id: 'nav-about', icon_path: 'icons/information.svg', mobile: true) %>
+              <%= render Nav::ItemComponent.new(path: chat_link, text: 'Community', test_id: 'nav-community', icon_path: 'icons/speech-bubbles.svg', mobile: true) %>
             <% end %>
           </div>
           <hr class="border-t border-gray-200 my-4" aria-hidden="true">
           <div class="px-2 space-y-1">
             <% if user_signed_in? %>
-              <%= render Nav::ItemComponent.new(path: edit_user_registration_path, link_text: 'Settings', icon_path: 'icons/gear.svg', mobile: true) %>
-              <%= render Nav::ItemComponent.new(path: logout_path, link_text: 'Log out', icon_path: 'icons/log-out.svg', mobile: true) %>
+              <%= render Nav::ItemComponent.new(path: edit_user_registration_path, text: 'Settings', test_id: 'nav-settings', icon_path: 'icons/gear.svg', mobile: true) %>
+              <%= render Nav::ItemComponent.new(path: logout_path, text: 'Log out', test_id: 'nav-logout', icon_path: 'icons/log-out.svg', mobile: true) %>
             <% else %>
-              <%= render Nav::ItemComponent.new(path: sign_up_path, link_text: 'Get started', icon_path: 'icons/lightning-bolt.svg', mobile: true) %>
-              <%= render Nav::ItemComponent.new(path: login_path, link_text: 'Log in', icon_path: 'icons/log-in.svg', mobile: true) %>
+              <%= render Nav::ItemComponent.new(path: sign_up_path, text: 'Get started', test_id: 'nav-signup', icon_path: 'icons/lightning-bolt.svg', mobile: true) %>
+              <%= render Nav::ItemComponent.new(path: login_path, text: 'Log in', test_id: 'nav-login', icon_path: 'icons/log-in.svg', mobile: true) %>
             <% end %>
           </div>
         </nav>
