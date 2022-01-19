@@ -20,8 +20,18 @@
     aria-labelledby="user-menu-button"
     tabindex="-1"
   >
+  <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+
+    <%= link_to edit_user_registration_path, class: "text-gray-700 group flex items-center px-3 py-2 text-sm #{ 'bg-gray-100 text-gray-900' if current_page?(edit_user_registration_path) }" do %>
+        <%= inline_svg_tag 'icons/gear-solid.svg', class: 'mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500', aria: true, title: 'settings icon' %>
+        Settings
+    <% end %>
+
+    <%= link_to logout_path, class: "text-gray-700 group flex items-center px-3 py-2 text-sm" do %>
+        <%= inline_svg_tag 'icons/logout.svg', class: 'mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500', aria: true, title: 'settings icon' %>
+        Log out
+    <% end %>
     <!-- Active: "bg-gray-100", Not Active: "" -->
-    <%= link_to 'Settings', edit_user_registration_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 #{ 'bg-gray-100' if current_page?(edit_user_registration_path)}" %>
-    <%= link_to 'Log out', logout_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 #{ 'bg-gray-100' if current_page?(logout_path)}" %>
+
   </div>
 </div>
