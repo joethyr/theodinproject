@@ -9,8 +9,6 @@ class StaticPagesController < ApplicationController
 
   def style_guide; end
 
-  def test_page; end
-
   def success_stories
     @success_stories = SuccessStory.all
   end
