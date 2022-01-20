@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Nav::ItemComponent, type: :component do
-
   context 'when mobile' do
     it 'renders mobile nav item' do
       component = described_class.new(
